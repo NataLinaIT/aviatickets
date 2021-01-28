@@ -1,5 +1,5 @@
 
-# Aviatickets search App
+## Avia tickets search App
 
 ### Technologies used:
 * HTML5, CSS3, Javascript
