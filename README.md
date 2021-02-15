@@ -12,16 +12,17 @@
 * cypress
 
 You can run app:
-### `npm run dev`
+##### `npm run dev`
 
 Runs the app in the development mode.
 Open [http://localhost:9000](http://localhost:9000) to view it in the browser.
 
 Runs UNIT tests:
-npm run test   
+##### `npm run test` 
 
 Runs E2E tests:
-npm run cypress:open
+##### `npm run cypress:open`
+
 ## App Overview:
 
 <div align="center">
