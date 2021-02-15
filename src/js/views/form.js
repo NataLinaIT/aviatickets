@@ -18,6 +18,7 @@ class FormUI {
     this.destinationAutocomplete = autocompleteInstance(this.destination);
     this.departDatePicker = datePickerInstance(this.depart);
     this.returnDatePicker = datePickerInstance(this.return);
+  
   }
 
   get form() {

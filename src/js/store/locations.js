@@ -1,12 +1,12 @@
 import api from "../services/apiService";
 import { formatDate } from "../helpers/date";
 
-class Locations {
+export class Locations {
   constructor(api, helpers) {
     this.api = api;
     this.countries = null;
     this.cities = null;
-    this.shortCitiesList = null;
+    this.shortCitiesList = {};
     this.lastSearch = {};
     this.airlines = {};
     this.formatDate = helpers.formatDate;
@@ -17,13 +17,11 @@ class Locations {
       this.api.cities(),
       this.api.airlines(),
     ]);
-
     const [countries, cities, airlines] = response;
     this.countries = this.serializeCountries(countries);
     this.cities = this.serializeCities(cities);
     this.shortCitiesList = this.createShortCitiesList(this.cities);
     this.airlines = this.serializeAirlines(airlines);
-
     return response;
   }
 
@@ -31,7 +29,6 @@ class Locations {
     const city = Object.values(this.cities).find(
       (item) => item.full_name === key
     );
-
     return city.code;
   }
 
@@ -58,14 +55,16 @@ class Locations {
 
   serializeAirlines(airlines) {
     return airlines.reduce((acc, item) => {
-      item.logo = `https://pics.avs.io/200/200/${item.code}.png`;
-      item.name = item.name || item.name_translations.en;
-      acc[item.code] = item;
+      const itemCopy = { ...item };
+      itemCopy.logo = `https://pics.avs.io/200/200/${item.code}.png`;
+      itemCopy.name = itemCopy.name || itemCopy.name_translations.en;
+      acc[itemCopy.code] = itemCopy;
       return acc;
     }, {});
   }
 
   serializeCountries(countries) {
+    if (!Array.isArray(countries) || !countries.length) return {};
     //{'Country code': {...}}
     return countries.reduce((acc, country) => {
       acc[country.code] = country;
