@@ -6,7 +6,7 @@
 * axiox
 * materialize-css
 * webpack
-
+* jest
 
 You can run app:
 ### `npm run dev`
